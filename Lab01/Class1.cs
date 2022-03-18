@@ -65,6 +65,7 @@ namespace Lab01
                 Console.WriteLine($"A {i} = {a[i]}");
 
             return a;
+
         }
     }
 }
