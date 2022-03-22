@@ -6,7 +6,7 @@ namespace Lab01
     {
         static void Main(string[] args)
         {
-            Generator.GenerateAlmostSorted(10, 0, 9999);
+            Generators.GenerateAlmostSorted(100, 0, 10);
         }
 
     }
