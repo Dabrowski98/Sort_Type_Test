@@ -6,7 +6,7 @@ namespace Lab01
     {
         static void Main(string[] args)
         {
-            Generators.GenerateAlmostSorted(100, 0, 10);
+            sortingAlgoritms.insertionSort(Generators.GenerateRandom( 10 , 0 , 10 ));
         }
 
     }
