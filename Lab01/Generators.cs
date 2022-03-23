@@ -13,10 +13,12 @@ namespace Lab01
             {
                 var losowe = new Random();
                 a[i] = losowe.Next(minVal, maxVal);
-
             }
-                foreach(int liczba in a)
-                    Console.WriteLine(liczba);
+            foreach(int liczba in a)
+            Console.Write(liczba + "    ");
+            Console.WriteLine();
+
+            
             return a;
         }
 
@@ -25,6 +27,8 @@ namespace Lab01
             int[] a = GenerateRandom(size, minVal, maxVal);
             Array.Sort(a);
             return a;
+            
+
         }
 
         public static int[] GenerateReversed(int size, int minVal, int maxVal)
@@ -38,21 +42,25 @@ namespace Lab01
         {
             int[] a = GenerateSorted(size, minVal, maxVal);
             int temp;
-            var firstRandom = new Random();
-            var secondRandom = new Random();
-            int first = firstRandom.Next(0, size);
-            int second = secondRandom.Next(0, size);
+            var firstRandomization = new Random();
+            var secondRandomization = new Random();
+            int first = firstRandomization.Next(0, size);
+            int second = secondRandomization.Next(0, size);
             var used = new ArrayList();
+            double multiplier = 0.02; // 0.02 = 4% of values wont in order.
 
-            for (int i = 0; i < Math.Ceiling(size * 0.02); i++) // 0.02 = 4% of values wont be sorted.
+            if (size < 10 && multiplier <= 0.02)
+                multiplier = multiplier * 10;
+
+            for (int i = 0; i < Math.Ceiling(size * multiplier); i++) 
             {
                 while (used.Contains(first))
-                    first = firstRandom.Next(0, size);
+                    first = firstRandomization.Next(0, size);
 
                 used.Add(first);
 
                 while (used.Contains(second))
-                    second = secondRandom.Next(0, size);
+                    second = secondRandomization.Next(0, size);
 
                 used.Add(second);
 
@@ -62,16 +70,12 @@ namespace Lab01
                     a[first] = a[second];
                     a[second] = temp;
                 }
-                foreach (int liczba in a)
-                {
-                    Console.WriteLine(liczba);
-                }
+                
             }
 
-            //for (int i = 0; i < size; i++)
-            //    Console.WriteLine($"A {i} = {a[i]}");
 
             return a;
+
         }
 
         public static int[] fewUnique(int size, int minVal, int maxVal)
