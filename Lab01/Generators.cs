@@ -17,8 +17,6 @@ namespace Lab01
             foreach(int liczba in a)
             Console.Write(liczba + "    ");
             Console.WriteLine();
-
-            
             return a;
         }
 

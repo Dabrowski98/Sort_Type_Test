@@ -6,7 +6,8 @@ namespace Lab01
     {
         static void Main(string[] args)
         {
-            sortingAlgoritms.mergeSort(Generators.GenerateRandom(10, 0, 10));
+            int[] a = Generators.GenerateRandom(10, 0, 10);
+            sortingAlgoritms.quickSort(a);
         }
 
     }
