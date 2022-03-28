@@ -8,10 +8,15 @@ namespace Lab01
 {
     class sortingAlgoritms
     {
+        public static void printArray(int[] a)
+        {
+            foreach(int element in a)
+                Console.Write(element + "   ");
+            Console.WriteLine("\n");
 
+        }
         public static void insertionSort(int[] a)
         {
-
             for (int i = 1; i < a.Length; i++)
             {
                 int actual = a[i];
@@ -25,7 +30,6 @@ namespace Lab01
                 a[b + 1] = actual;
             }
         }
-
         public static void mergeSort(int[] a)
         {
             int arrayLength = a.Length;
@@ -53,7 +57,6 @@ namespace Lab01
             mergeSort(right);
             merge(left, right, a);
         }
-
         private static void merge(int[] left, int[] right, int[] a)
         {
             int leftSize = a.Length / 2;
@@ -88,48 +91,44 @@ namespace Lab01
                 i++;
                 r++;
             }
-            
-
-
         }
-
-        public static void quickSort(int[] a)
+        private static int partition(int[] a, int low, int high)
         {
-            int arrayLength = a.Length;
-            int pivot = a[arrayLength - 1];
-            int j = 0;
-            int temp = 0;
 
-            for (int i = -1; i < arrayLength - 1;)
+            int i = (low - 1);
+            int pivot = a[high];
+            int temp;
+
+            for (int j = low; j <= high - 1; j++)
             {
-                 Console.Write($"i = {i} a j = {j}");
-                
-
-                if (a[j] > pivot && j != arrayLength - 1)
-                {
-                    j++;
-                    Console.WriteLine();
-                    foreach (int liczba in a)
-                        Console.Write(liczba + "    ");
-
-                }
-
-                else if (a[j] <= pivot && j != arrayLength - 1)
+                if (pivot > a[j])
                 {
                     i++;
                     temp = a[i];
                     a[i] = a[j];
                     a[j] = temp;
-                    j++;
-                    Console.WriteLine();
-                    foreach (int liczba in a)
-                        Console.Write(liczba + "    ");
                 }
+            }
+            temp = a[i + 1];
+            a[i + 1] = a[high];
+            a[high] = temp;
+            return (i + 1);
 
-                else if (j == arrayLength - 1 && a[j] <= pivot)
-                    break;
-
+        }
+        private static void quickSort(int[] a, int low, int high)
+        {
+            if (low < high)
+            {
+            int pi = partition(a, low, high);
+            quickSort(a, low, pi - 1);
+            quickSort(a, pi + 1, high);
             }
         }
+
+        public static void quickSort(int[] a)
+        {
+            quickSort(a, 0, a.Length - 1);
+        }
+
     }
 }

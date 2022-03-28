@@ -14,9 +14,6 @@ namespace Lab01
                 var losowe = new Random();
                 a[i] = losowe.Next(minVal, maxVal);
             }
-            foreach(int liczba in a)
-            Console.Write(liczba + "    ");
-            Console.WriteLine();
             return a;
         }
 
@@ -76,7 +73,7 @@ namespace Lab01
 
         }
 
-        public static int[] fewUnique(int size, int minVal, int maxVal)
+        public static int[] GeneratefewUnique(int size, int minVal, int maxVal)
         {
                 int[] a = GenerateRandom(size, minVal, maxVal);
 
