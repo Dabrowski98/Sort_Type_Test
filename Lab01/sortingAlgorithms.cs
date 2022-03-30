@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Lab01
 {
-    class sortingAlgoritms
+    public class sortingAlgorithms
     {
-        public static void printArray(int[] a)
+        public static void printArray(int[] a)  //sortingAlgorithms.printArray(a);
         {
-            foreach(int element in a)
+            foreach (double element in a)
+            {
                 Console.Write(element + "   ");
-            Console.WriteLine("\n");
+                Console.WriteLine("\n");
+            }
 
         }
         public static void insertionSort(int[] a)

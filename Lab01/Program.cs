@@ -1,128 +1,97 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Lab01
 {
-    class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
-            Test("Big", "Reversed");
+            Size("Medium", "Random");
         }
 
-        static void Tests(int[] a)
+        static void Test(int[] a)
         {
             int[] a1 = new int[a.Length];
             Stopwatch stopWatch = new Stopwatch();
+            double[] times = new double[10];
 
             for (int i = 0; i < 10; i++)
             {
                 Array.Copy(a, a1, a.Length);
+
                 stopWatch.Start();
-                sortingAlgoritms.insertionSort(a);
+                sortingAlgorithms.insertionSort(a1);
                 stopWatch.Stop();
-                Console.WriteLine(stopWatch.Elapsed);
+
+                TimeSpan time = stopWatch.Elapsed;
+                times[i] = time.Milliseconds;
+                Console.WriteLine(time);
+                Console.WriteLine(time.Ticks);
+                stopWatch.Reset();
+
+            }
+            foreach(double h in times)
+                Console.WriteLine(h);
+            standardDeviation(times);
+        }
+        static void standardDeviation(double[] times)
+        {
+            if (times.Any())
+            {
+                double average = (times.Average()) / 100;
+                double sum = times.Sum(d => Math.Pow(d - average, 2));
+                double sD = (Math.Sqrt(sum) / times.Count()) / 1000;
+                Console.Write($"Insertion Sort: {Math.Round(average, 5)}s +/- ");
+                Console.WriteLine($"{Math.Round(sD, 5)}s");    
             }
         }
-
-        static void Test(string size, string type)
+        static void Size(string size, string type)
         {
             int[] a;
             switch (size)
             {
                 case "Small":
-                    Tests(a = generateSmall(type));
+                    Test(a = generate(type, 100, 100));
                     break;
 
                 case "Medium":
-                    Tests(a = generateMedium(type));
+                    Test(a = generate(type, 1000, 10000));
                     break;
 
                 case "Big":
-                    Tests(a = generateBig(type));
+                    Test(a = generate(type, 100000, 100000));
+
                     break;
             }
         }
-        static int[] generateSmall(string type)
+        static int[] generate(string type, int size, int variables)
         {
             int[] a;
             switch (type)
             {
                 case "Random":
-                    a = Generators.GenerateRandom(10, 0, 100);
+                    a = Generators.GenerateRandom(size, 0, variables);
                     return a;
 
                 case "Sorted":
-                    a = Generators.GenerateSorted(10, 0, 100);
+                    a = Generators.GenerateSorted(size, 0, variables);
                     return a;
 
                 case "Reversed":
-                    a = Generators.GenerateReversed(10, 0, 100);
+                    a = Generators.GenerateReversed(size, 0, variables);
                     return a;
 
                 case "AlmostSorted":
-                    a = Generators.GenerateAlmostSorted(10, 0, 100);
+                    a = Generators.GenerateAlmostSorted(size, 0, variables);
                     return a;
                     
                 case "FewUnique":   
-                    a = Generators.GeneratefewUnique(10, 0, 10);
+                    a = Generators.GeneratefewUnique(size, 0, size);
                     return a;
 
-            }
-            return null;
-        }
-
-        static int[] generateMedium(string type)
-        {
-            int[] a;
-            switch (type)
-            {
-                case "Random":
-                    a = Generators.GenerateRandom(1000, 0, 10000);
-                    return a;
-
-                case "Sorted":
-                    a = Generators.GenerateSorted(1000, 0, 10000);
-                    return a;
-
-                case "Reversed":
-                    a = Generators.GenerateReversed(1000, 0, 10000);
-                    return a;
-
-                case "AlmostSorted":
-                    a = Generators.GenerateAlmostSorted(1000, 0, 10000);
-                    return a;
-
-                case "FewUnique":
-                    a = Generators.GeneratefewUnique(1000, 0, 1000);
-                    return a;
-            }
-            return null;
-        }
-        static int[] generateBig(string type)
-        {
-            int[] a;
-            switch (type)
-            {
-                case "Random":
-                    a = Generators.GenerateRandom(100000, 0, 1000000);
-                    return a;
-
-                case "Sorted":
-                    a = Generators.GenerateSorted(100000, 0, 1000000);
-                    return a;
-
-                case "Reversed":
-                    a = Generators.GenerateReversed(100000, 0, 1000000);
-                    return a;
-
-                case "AlmostSorted":
-                    a = Generators.GenerateAlmostSorted(100000, 0, 1000000);
-                    return a;
-
-                case "FewUnique":
-                    a = Generators.GeneratefewUnique(100000, 0, 100000);
-                    return a;
             }
             return null;
         }
