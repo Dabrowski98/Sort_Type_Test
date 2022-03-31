@@ -16,7 +16,7 @@ namespace Lab01
             }
             return a;
         }
-
+         
         public static int[] GenerateSorted(int size, int minVal, int maxVal)
         {
             int[] a = GenerateRandom(size, minVal, maxVal);

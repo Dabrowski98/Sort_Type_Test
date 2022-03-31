@@ -117,19 +117,24 @@ namespace Lab01
             return (i + 1);
 
         }
-        private static void quickSort(int[] a, int low, int high)
+        private static void quickSortClassical(int[] a, int low, int high)
         {
             if (low < high)
             {
             int pi = partition(a, low, high);
-            quickSort(a, low, pi - 1);
-            quickSort(a, pi + 1, high);
+            quickSortClassical(a, low, pi - 1);
+            quickSortClassical(a, pi + 1, high);
             }
+        }
+
+        public static void quickSortClassical(int[] a)
+        {
+            quickSortClassical(a, 0, a.Length - 1);
         }
 
         public static void quickSort(int[] a)
         {
-            quickSort(a, 0, a.Length - 1);
+            Array.Sort(a);
         }
 
     }
