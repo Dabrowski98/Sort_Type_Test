@@ -21,11 +21,11 @@ namespace Lab01
                 {
                     Console.WriteLine("1| Wybierz test manualnie");
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("\nRozmiary i typy tablic: Small\tRandom\n" +
-                                      "\t\t\tMedium\tSorted\n" +
-                                      "\t\t\tBig\tReversed\n" +
-                                      "\t\t\t\tAlmostSorted\n" +
-                                      "\t\t\t\tFewUnique\n");
+                    Console.WriteLine("\nRozmiary i typy tablic: Small\t(100)\t\tRandom\n" +
+                                      "\t\t\tMedium\t(1000)\t\tSorted\n" +
+                                      "\t\t\tBig\t(10000)\t\tReversed\n" +
+                                      "\t\t\t\t\t\tAlmostSorted\n" +
+                                      "\t\t\t\t\t\tFewUnique\n");
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("\n | Wybierz Rozmiar tablicy: ");
                     string size = Console.ReadLine().ToUpper();
