@@ -20,7 +20,7 @@ namespace Lab01
                 if (menu == 1)
                 {
                     Console.WriteLine("1| Wybierz test manualnie");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine("\nRozmiary i typy tablic: Small\t(100)\t\tRandom\n" +
                                       "\t\t\tMedium\t(1000)\t\tSorted\n" +
                                       "\t\t\tBig\t(10000)\t\tReversed\n" +
@@ -40,6 +40,12 @@ namespace Lab01
 
                 else if (menu == 2)
                 {
+                    Console.WriteLine("2| Uruchom wszystkie testy");
+
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    Console.WriteLine("\nRozmiary tablic: Small (100) Medium (1000) Big (10000)\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+
                     Test("SMALL", "RANDOM");
                     Test("SMALL", "SORTED");
                     Test("SMALL", "REVERSED");
@@ -62,6 +68,7 @@ namespace Lab01
                     Console.ReadKey();
                     Console.Clear();
                 }
+                if (menu == 9) Console.WriteLine("9| Wyłącz program");
             } while (menu != 9);
         }
 
@@ -184,7 +191,7 @@ namespace Lab01
 
         public static void coloredTitle(string size, string type)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($" | {size} {type}: \n");
             Console.ForegroundColor = ConsoleColor.White;
         }
