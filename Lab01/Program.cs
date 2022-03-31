@@ -8,26 +8,115 @@ namespace Lab01
     {
         static void Main(string[] args)
         {
-            Test("Small", "Random");
-            Test("Small", "Sorted");
-            Test("Small", "Reversed");
-            Test("Small", "AlmostSorted");
-            Test("Small", "FewUnique");
+            int menu = -1;
 
-            Test("Medium", "Random");
-            Test("Medium", "Sorted");
-            Test("Medium", "Reversed");
-            Test("Medium", "AlmostSorted");
-            Test("Medium", "FewUnique");            
-            
-            Test("Big", "Random");
-            Test("Big", "Sorted");
-            Test("Big", "Reversed");
-            Test("Big", "AlmostSorted");
-            Test("Big", "FewUnique");
+            do
+            {
+                Console.WriteLine(" | Wybierz co chcesz zrobić\n\n1| Wybierz test manualnie\n2| Uruchom wszystkie testy\n9| Wyłącz program\n");
+                Console.Write(" | Wybierz co chcesz zrobić: ");
+                menu = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
+
+                if (menu == 1)
+                {
+                    Console.WriteLine("1| Wybierz test manualnie");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\nRozmiary i typy tablic: Small\tRandom\n" +
+                                      "\t\t\tMedium\tSorted\n" +
+                                      "\t\t\tBig\tReversed\n" +
+                                      "\t\t\t\tAlmostSorted\n" +
+                                      "\t\t\t\tFewUnique\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\n | Wybierz Rozmiar tablicy: ");
+                    string size = Console.ReadLine().ToUpper();
+                    Console.Write(" | Wybierz typ tablicy: ");
+                    string type = Console.ReadLine().ToUpper();
+                    Console.Clear();
+                    Test(size, type);
+                    Console.Write("\n | Wcisnij dowolny przycisk aby wrócić do Menu: ");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+
+                else if (menu == 2)
+                {
+                    Test("SMALL", "RANDOM");
+                    Test("SMALL", "SORTED");
+                    Test("SMALL", "REVERSED");
+                    Test("SMALL", "ALMOST_SORTED");
+                    Test("SMALL", "FEW_UNIQUE");
+
+                    Test("MEDIUM", "RANDOM");
+                    Test("MEDIUM", "SORTED");
+                    Test("MEDIUM", "REVERSED");
+                    Test("MEDIUM", "ALMOST_SORTED");
+                    Test("MEDIUM", "FEW_UNIQUE");
+
+                    Test("BIG", "RANDOM");
+                    Test("BIG", "SORTED");
+                    Test("BIG", "REVERSED");
+                    Test("BIG", "ALMOST_SORTED");
+                    Test("BIG", "FEW_UNIQUE");
+
+                    Console.Write("\n | Wcisnij dowolny przycisk aby wrócić do Menu: ");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+            } while (menu != 9);
         }
 
-        static void testFn(int[] a)
+        static void Test(string size, string arrayType)
+        {
+            int[] array;
+            switch (size)
+            {
+                case "SMALL":
+                    coloredTitle(size, arrayType);
+                    stopwatchSorting(array = type(arrayType, 100, 1000));
+                    Console.WriteLine();        
+                    break;
+
+                case "MEDIUM":
+                    coloredTitle(size, arrayType);
+                    stopwatchSorting(array = type(arrayType, 1000, 10000));
+                    Console.WriteLine();
+                    break;
+
+                case "BIG":
+                    coloredTitle(size, arrayType);
+                    stopwatchSorting(array = type(arrayType, 10000, 100000));
+                    Console.WriteLine();
+                    break;
+            }
+        }
+        static int[] type(string type, int size, int variables)
+        {
+            int[] a;
+            switch (type)
+            {
+                case "RANDOM":
+                    a = Generators.GenerateRandom(size, 0, variables);
+                    return a;
+
+                case "SORTED":
+                    a = Generators.GenerateSorted(size, 0, variables);
+                    return a;
+
+                case "REVERSED":
+                    a = Generators.GenerateReversed(size, 0, variables);
+                    return a;
+
+                case "ALMOST_SORTED":
+                    a = Generators.GenerateAlmostSorted(size, 0, variables);
+                    return a;
+
+                case "FEW_UNIQUE":
+                    a = Generators.GeneratefewUnique(size, 0, size);
+                    return a;
+            }
+            return null;
+        }
+        static void stopwatchSorting(int[] a)
         {
             int[] a1 = new int[a.Length];
             Stopwatch stopWatch = new Stopwatch();
@@ -42,28 +131,28 @@ namespace Lab01
                     switch (j)
                     { 
                         case 0:
-                            if (i == 0) Console.Write("Insertion Sort:          ");
+                            if (i == 0) Console.Write(" | Insertion Sort:          ");
                             stopWatch.Start();
                             sortingAlgorithms.insertionSort(a1);
                             stopWatch.Stop();
                             break;
 
                         case 1:
-                            if (i == 0) Console.Write("Merge Sort:              ");
+                            if (i == 0) Console.Write(" | Merge Sort:              ");
                             stopWatch.Start();
                             sortingAlgorithms.mergeSort(a1);
                             stopWatch.Stop();
                             break;
 
                         case 2:
-                            if (i == 0) Console.Write("QuickSort Classical:     ");
+                            if (i == 0) Console.Write(" | QuickSort Classical:     ");
                             stopWatch.Start();
                             sortingAlgorithms.quickSortClassical(a1);
                             stopWatch.Stop();
                             break;
 
                         case 3:
-                            if (i == 0) Console.Write("QuickSort:               ");
+                            if (i == 0) Console.Write(" | QuickSort:               ");
                             stopWatch.Start();
                             sortingAlgorithms.quickSort(a1);
                             stopWatch.Stop();
@@ -77,8 +166,6 @@ namespace Lab01
                 Calc(table);
             }
         }
-
-
         static void Calc(double[] times)
         {
             if (times.Any())
@@ -94,63 +181,12 @@ namespace Lab01
                 
             }
         }
-        static void Test(string size, string type)
-        {
-            int[] a;
-            switch (size)
-            {
-                case "Small":
-                    printColored(size, type);
-                    testFn(a = generate(type, 100, 1000));
-                    Console.WriteLine();        
-                    break;
 
-                case "Medium":
-                    printColored(size, type);
-                    testFn(a = generate(type, 1000, 10000));
-                    Console.WriteLine();
-                    break;
-
-                case "Big":
-                    printColored(size, type);
-                    testFn(a = generate(type, 10000, 100000));
-                    Console.WriteLine();
-                    break;
-            }
-        }
-
-        public static void printColored(string size, string type)
+        public static void coloredTitle(string size, string type)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{size} {type}: \n");
+            Console.WriteLine($" | {size} {type}: \n");
             Console.ForegroundColor = ConsoleColor.White;
-        }
-        static int[] generate(string type, int size, int variables)
-        {
-            int[] a;
-            switch (type)
-            {
-                case "Random":
-                    a = Generators.GenerateRandom(size, 0, variables);
-                    return a;
-
-                case "Sorted":
-                    a = Generators.GenerateSorted(size, 0, variables);
-                    return a;
-
-                case "Reversed":
-                    a = Generators.GenerateReversed(size, 0, variables);
-                    return a;
-
-                case "AlmostSorted":
-                    a = Generators.GenerateAlmostSorted(size, 0, variables);
-                    return a;
-                    
-                case "FewUnique":   
-                    a = Generators.GeneratefewUnique(size, 0, size);
-                    return a;
-            }
-            return null;
         }
     }
 }

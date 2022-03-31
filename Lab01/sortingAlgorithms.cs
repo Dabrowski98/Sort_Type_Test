@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab01
 {
     public class sortingAlgorithms
     {
-        public static void printArray(int[] a)  //sortingAlgorithms.printArray(a);
+        public static void printArray(int[] a)
         {
             foreach (double element in a)
             {
                 Console.Write(element + "   ");
                 Console.WriteLine("\n");
             }
-
         }
         public static void insertionSort(int[] a)
         {
